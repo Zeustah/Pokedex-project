@@ -23,7 +23,7 @@ export function initState() {
     output: process.stdout,
     prompt: "Pokedex > ",
   });
-  const pokeapi = new PokeAPI();
+  const pokeapi = new PokeAPI(60000);
   const nextLocationsURL = "";
   const prevLocationsURL = "";
   const state = {
