@@ -7,15 +7,19 @@ export function cleanInput(input: string): string[] {
   return lowered.trim().split(/\s+/);
 }
 
-export function startREPL(state: State) {
+export async function startREPL(state: State) {
   state.readline.prompt();
-  state.readline.on("line", (input: string) => {
+  state.readline.on("line", async (input: string) => {
     if (!input) {
       state.readline.prompt();
     }
     const cmd = state.commands[input];
     if (cmd) {
-      cmd.callback(state);
+      try {
+        await cmd.callback(state);
+      } catch (error) {
+        console.error((error as Error).message);
+      }
     } else {
       console.log("Unknown command");
     }
