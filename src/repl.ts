@@ -10,13 +10,16 @@ export function cleanInput(input: string): string[] {
 export async function startREPL(state: State) {
   state.readline.prompt();
   state.readline.on("line", async (input: string) => {
-    if (!input) {
+    const words = cleanInput(input);
+    if (words.length === 0) {
       state.readline.prompt();
+      return;
     }
-    const cmd = state.commands[input];
+    const cmd = state.commands[words[0]];
+    const args = words.slice(1);
     if (cmd) {
       try {
-        await cmd.callback(state);
+        await cmd.callback(state, ...args);
       } catch (error) {
         console.error((error as Error).message);
       }
