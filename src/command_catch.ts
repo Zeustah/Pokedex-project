@@ -14,6 +14,7 @@ export async function commandCatch(
   console.log(`Throwing a Pokeball at ${pokemonName}...`);
   if (roll < catchRate) {
     console.log(`${pokemonName} was caught!`);
+    state.caughtPokemon[pokeInfo.name] = pokeInfo;
   } else {
     console.log(`${pokemonName} escaped!`);
   }
