@@ -15,6 +15,7 @@ export async function commandCatch(
   if (roll < catchRate) {
     console.log(`${pokemonName} was caught!`);
     state.caughtPokemon[pokeInfo.name] = pokeInfo;
+    console.log("You may now inspect it with the inspect command.");
   } else {
     console.log(`${pokemonName} escaped!`);
   }
